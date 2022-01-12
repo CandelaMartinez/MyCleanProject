@@ -1,0 +1,52 @@
+﻿@model MyCleanProject.Site.ViewModels.custom.FooterViewModel
+
+
+<footer class="bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center py-4">
+                <ul class="list-inline-item">
+
+                    @foreach (var item in Model.ListaFooterItems)
+                    {
+                        <li class="list-inline-item">
+
+                            <a href="@item.FooterLink.Url" target="@item.FooterLink.Target" title=@item.Title>
+
+
+
+                                @if (item.SocialIconSelector != null && item.SocialIconSelector.Any())
+                                {
+                                    var icon = item.SocialIconSelector;
+
+                                    if (icon.Equals("Facebook"))
+                                    {
+                                        <span><i class="fab fa-facebook fa-2x"></i></span>
+
+                                    }
+                                    else if (icon.Equals("Instagram"))
+                                    {
+
+
+                                        <span><i class="fab fa-instagram fa-2x "></i></span>
+
+                                    }
+                                    else
+                                    {
+                                        <span><i class="fab fa-twitter fa-2x "></i></span>
+                                    }
+
+                                }
+
+                            </a>
+
+                        </li>
+
+                    }
+
+                </ul>
+                <p class="text-white">Copyright &copy; @DateTime.Now.Year My Page</p>
+            </div>
+        </div>
+    </div>
+</footer>

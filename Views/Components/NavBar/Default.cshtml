@@ -1,0 +1,55 @@
+﻿@model MyCleanProject.Site.ViewModels.custom.NavBarViewModel
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">@Model.SiteTitle</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                @*entro en el navbarNested lleno de navBarItem*@
+                @if (Model.ListaNavBar != null && Model.ListaNavBar.Any())
+                {
+                    foreach (var item in Model.ListaNavBar)
+                    {
+                        var hasChildren = item.NavBarChildren != null && item.NavBarChildren.Any();
+
+
+                        if (!hasChildren)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@item.NavBarLink.Url" target="@item.NavBarLink.Target">
+                                    @item.Title
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            foreach (NavBarItem child in item.NavBarChildren)
+                            {
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="@item.NavBarLink.Url" target="@item.NavBarLink.Target" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @item.Title
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="@child.NavBarLink.Url" target="@child.NavBarLink.Target">@child.NavBarLink.Name</a>
+                                        <div class="dropdown-divider"></div>
+
+                                    </div>
+                                </li>
+                            }
+                        }
+
+
+                    }
+
+                }
+            </ul>
+        </div>
+    </div>
+</nav>
